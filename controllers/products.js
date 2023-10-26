@@ -17,7 +17,7 @@ exports.createProduct = async (req, res) => {
       }
       const newProduct = new Product({ name, id, price, unit, availableAmount });
       const { error } = Product.validate(newProduct);
-      console.log(error);
+      
 
     if (error) {
       return res.status(400).json({ error: error.details[0].message });
