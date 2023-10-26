@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
+const cors = require("cors"); // Import the cors middleware
 const productRoutes = require("./routes/products");
 const myProductRoutes = require("./routes/myProducts");
 
@@ -15,6 +16,8 @@ mongoose.connect("mongodb://127.0.0.1:27017/Products", {
 // Create a Product schema and model
 
 app.use(bodyParser.json());
+app.use(cors()); // Use the cors middleware to enable CORS for all routes
+
 
 // Use the product routes
 app.use("/products", productRoutes);

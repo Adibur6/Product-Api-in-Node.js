@@ -78,3 +78,25 @@ exports.deleteMyProduct = async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 };
+exports.deleteProduct = async (req, res) => {
+  try {
+    const productId = req.params.id;
+    const product = await Product.findOneAndRemove({ id: productId });
+
+    if (!product) {
+      res.status(404).json({ error: 'Product not found' });
+    } else {
+      res.json({ message: 'Product deleted' });
+    }
+  } catch (error) {
+    res.status(500).json({ error: 'Internal server error' });
+  }
+};
+exports.deleteAllMyProducts = async (req, res) => {
+  try {
+    await MyProduct.deleteMany({}); // Deletes all myProducts
+    res.json({ message: "All myProducts deleted" });
+  } catch (error) {
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
